@@ -6,7 +6,6 @@ import { Filter } from "components/ButtonAdd";
 import { nanoid } from 'nanoid';
 import { ContactList } from "components/ContactList";
 import { useDispatch, useSelector } from "react-redux";
-// import { store } from "components/Redux/Store";
 import { setFilter } from "components/Redux/filterReducer";
 import { setContacts } from "components/Redux/contactsReducer";
 
@@ -14,7 +13,7 @@ export const Input = () => {
 
   const filter = useSelector(state => state.filter);
   const contacts = useSelector(state => state.contacts);
-  console.log(contacts);
+  console.log(contacts)
 
   const dispatch = useDispatch();
   
@@ -38,6 +37,7 @@ const handleDeleteContact = (id) => {
   dispatch(setContacts(contacts.filter((contact) => contact.id !== id)));
 };
 
+
   const handleChange = (e) => {
     const { value } = e.target;
     dispatch(setFilter(value))
@@ -51,8 +51,8 @@ const handleDeleteContact = (id) => {
     setName(e.target.value);
   };
 
-const handleSubmit = (e) => {
-  e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const existingContact = contacts.find((contact) => {
       return contact.name.toLowerCase() === name.toLowerCase();
     });
@@ -60,7 +60,6 @@ const handleSubmit = (e) => {
       alert(`${name} is already in contacts.`);
       return;
     }
-
     const id = nanoid();
     const newContact = { id, name, number };
     const updatedContacts = [...contacts, newContact];

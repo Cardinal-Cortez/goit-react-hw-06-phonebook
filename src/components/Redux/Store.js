@@ -17,7 +17,7 @@ import { filterReducer } from './filterReducer';
 
 const persistConfig = {
   key: 'root',
-  storage,
+    storage,
 }
 const persisedContactsReduser = persistReducer(
     persistConfig,
