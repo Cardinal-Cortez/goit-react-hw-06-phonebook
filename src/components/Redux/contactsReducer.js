@@ -5,7 +5,7 @@ export const contactsReducer = createSlice({
     initialState: [],
     reducers: {
         setContacts(state, action) {
-            return action.payload;
+            return state.push(action.payload);
         },
     },
 })
