@@ -53,7 +53,6 @@ const handleDeleteContact = (id) => {
 
 const handleSubmit = (e) => {
   e.preventDefault();
-  if (Array.isArray(contacts)) {
     const existingContact = contacts.find((contact) => {
       return contact.name.toLowerCase() === name.toLowerCase();
     });
@@ -61,7 +60,7 @@ const handleSubmit = (e) => {
       alert(`${name} is already in contacts.`);
       return;
     }
-  }
+
     const id = nanoid();
     const newContact = { id, name, number };
     const updatedContacts = [...contacts, newContact];
