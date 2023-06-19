@@ -12,26 +12,13 @@ import { setContacts } from "components/Redux/contactsReducer";
 export const Input = () => {
 
   const filter = useSelector(state => state.filter);
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.contacts);
   console.log(contacts)
 
   const dispatch = useDispatch();
   
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-
-
-  // useEffect(() => {
-  //   const storedContacts = localStorage.getItem("myContacts");
-  //   if (storedContacts) {
-  //     setContacts(JSON.parse(storedContacts))
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem("myContacts", JSON.stringify(contacts));
-  // },[contacts]);
-
   
 const handleDeleteContact = (id) => {
   dispatch(setContacts(contacts.filter((contact) => contact.id !== id)));
@@ -69,12 +56,9 @@ const handleDeleteContact = (id) => {
   };
 
   const filters = () => {
-    if (Array.isArray(contacts) && contacts.length > 0) {
       return contacts.filter((item) =>
         item.name.toLowerCase().includes(filter.toLowerCase())
       );
-    }
-    return [];
   };
 
   return (

@@ -2,21 +2,20 @@ import { Todo } from "components/Todo";
 import { List } from "./styled";
 import PropTypes from "prop-types";
 
-export const ContactList = ({onDeleteContact, contacts}) => {
-
+export const ContactList = ({ onDeleteContact, contacts }) => {
   return (
     <List>
-      {contacts
-        .map((item) => (
-          <Todo
-            {...item}
-            key={item.id}
-            onDelete={() => onDeleteContact(item.id)}
-          />
-        ))}
+      {contacts.map((item) => (
+        <Todo
+          {...item}
+          key={item.id} // Використовуйте унікальний `id` як ключ
+          onDelete={() => onDeleteContact(item.id)}
+        />
+      ))}
     </List>
   );
 };
+
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
