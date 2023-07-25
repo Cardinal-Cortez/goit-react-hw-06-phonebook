@@ -1,15 +1,29 @@
 import { Todo } from "components/Todo"; 
+import { useDispatch, useSelector } from "react-redux";
+import { deleteContact } from "Redux/contactsReducer";
 import { List } from "./styled";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
-export const ContactList = ({ onDeleteContact, contacts }) => {
+
+export const ContactList = () => {
+
+  const contacts = useSelector(state => state.contacts);
+  const filter = useSelector(state => state.filter);
+
+  const dispatch = useDispatch();
+  
+  const filters = () => {
+      return contacts.filter((item) =>
+        item.name.toLowerCase().includes(filter.toLowerCase())
+      );
+  };
   return (
     <List>
-      {contacts.map((item) => (
+      {filters().map((item) => (
         <Todo
           {...item}
-          key={item.id} // Використовуйте унікальний `id` як ключ
-          onDelete={() => onDeleteContact(item.id)}
+          key={item.id}
+          onDelete={() => dispatch(deleteContact(item.id))}
         />
       ))}
     </List>
@@ -17,15 +31,15 @@ export const ContactList = ({ onDeleteContact, contacts }) => {
 };
 
 
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.string
-      ]).isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
+// ContactList.propTypes = {
+//   contacts: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.oneOfType([
+//         PropTypes.number,
+//         PropTypes.string
+//       ]).isRequired,
+//       name: PropTypes.string.isRequired,
+//       number: PropTypes.string.isRequired,
+//     })
+//   ).isRequired,
+// };

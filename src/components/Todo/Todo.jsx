@@ -1,9 +1,13 @@
 import { Number, Item, Name, ButtonDel } from "./styled";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { deleteContact } from "Redux/contactsReducer";
 
-export const Todo = ({ name, number, onDelete }) => {
- const handleDelete = () => {
-    onDelete();
+export const Todo = ({ id, name, number}) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteContact(id));
   };
 
   return (
@@ -20,5 +24,4 @@ export const Todo = ({ name, number, onDelete }) => {
 Todo.propTypes = {
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
 };
