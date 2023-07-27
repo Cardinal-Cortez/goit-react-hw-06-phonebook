@@ -12,12 +12,11 @@ export const ContactList = () => {
 
   const dispatch = useDispatch();
   
-const filters = () => {
+  const filters = () => {
     return contacts.filter((item) =>
       item.name.toLowerCase().includes(filter.toLowerCase())
     );
-
-};
+  }
   return (
     <List>
       {filters().map((item) => (
