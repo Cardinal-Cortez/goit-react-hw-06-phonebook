@@ -6,14 +6,14 @@ import { Filter } from "components/ButtonAdd";
 import { ContactList } from "components/ContactList"; 
 import { useDispatch, useSelector } from "react-redux";
 
-import { addContacts } from "Redux/contactsReducer";
+import { addContact } from "Redux/contactsReducer";
 
 export const Input = () => {
 
   const dispatch = useDispatch();
 
-  const contacts = useSelector(state => state.contacts);
-  console.log(contacts); 
+  const contacts = useSelector(state => state.contacts.data);
+  console.log(contacts);
   
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
@@ -26,20 +26,22 @@ export const Input = () => {
     setName(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const existingContact = contacts.find((contact) => {
     
-    const existingContact = contacts.find((contact) => {
-      return contact.name.toLowerCase() === name.toLowerCase();
-    });
-    if (existingContact) {
-      alert(`${name} is already in contacts.`);
-      return;
-    }
-    dispatch(addContacts(name, number));
-    setName('');
-    setNumber('');
-  };
+    return contact.name.toLowerCase() === name.toLowerCase();
+  });
+  
+  if (existingContact) {
+    alert(`${name} is already in contacts.`);
+    return;
+  }
+
+  dispatch(addContact({name, number}));
+  setName('');
+  setNumber('');
+};
 
 
   return (

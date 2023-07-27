@@ -7,16 +7,17 @@ import { List } from "./styled";
 
 export const ContactList = () => {
 
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.data);
   const filter = useSelector(state => state.filter);
 
   const dispatch = useDispatch();
   
-  const filters = () => {
-      return contacts.filter((item) =>
-        item.name.toLowerCase().includes(filter.toLowerCase())
-      );
-  };
+const filters = () => {
+    return contacts.filter((item) =>
+      item.name.toLowerCase().includes(filter.toLowerCase())
+    );
+
+};
   return (
     <List>
       {filters().map((item) => (
