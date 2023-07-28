@@ -2,7 +2,7 @@ import { Todo } from "components/Todo";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteContact } from "Redux/contactsReducer";
 import { List } from "./styled";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 
 export const ContactList = () => {
@@ -13,6 +13,7 @@ export const ContactList = () => {
   const dispatch = useDispatch();
   
   const filters = () => {
+    
     return contacts.filter((item) =>
       item.name.toLowerCase().includes(filter.toLowerCase())
     );
@@ -31,15 +32,15 @@ export const ContactList = () => {
 };
 
 
-// ContactList.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.oneOfType([
-//         PropTypes.number,
-//         PropTypes.string
-//       ]).isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ).isRequired,
-// };
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string
+      ]).isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
